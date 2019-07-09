@@ -4,8 +4,7 @@
   "description": "Social media network",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "Team One",
   "license": "ISC",
@@ -22,5 +21,20 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoGood/instagram-app.git"
+  },
+  "keywords": [
+    "Web",
+    "Dev",
+    "Bootcamp",
+    "insta",
+    "app"
+  ],
+  "bugs": {
+    "url": "https://github.com/MoGood/instagram-app/issues"
+  },
+  "homepage": "https://github.com/MoGood/instagram-app#readme"
 }

@@ -12,11 +12,11 @@ app.use(bodyParser.urlencoded({extended: false}
   app.use(bodyParser.json());
 
 //Db config
-const db = require('./config/keys').mongoURI;
-mongoose
-.connect(db)
-.then(()=> console.log('MongoDb connected'))
-.catch(err => console.log(err));
+// const db = require('./config/keys').mongoURI;
+// mongoose
+// .connect(db)
+// .then(()=> console.log('MongoDb connected'))
+// .catch(err => console.log(err));
 
 
 app.get('/', (req, res) => res.send('Hello'));
@@ -27,5 +27,5 @@ app.use('/api/posts', posts);
 
 
 
-const port = 5004;
-app.listen(port, () => console.log('Server is running on port ${port}'));
+const port = 7002;
+app.listen(port, () => console.log(`Server is running on port ${port}`));
