@@ -11,16 +11,8 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
-  name: {
-    type: String,
-    required: true
-  },
   website:{
     type: String
-  },
-  emailAddress:{
-    type: String,
-    required: true
   },
   bio: {
     type: String
