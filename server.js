@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}
   app.use(bodyParser.json());
 
 // Db config
-const db = require('./config/keys').mongoURI;
+const db = require('./Config/keys').mongoURI;
 mongoose
 .connect(db)
 .then(()=> console.log('MongoDb connected'))
@@ -24,7 +24,7 @@ app.use(passport.initialize());
 
 
 //passport configuaration 
-require('./config/passport')(passport);
+require('./Config/passport')(passport);
 
 
 app.get('/', (req, res) => res.send('Hello world'));
