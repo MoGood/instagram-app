@@ -113,7 +113,6 @@ router.post(
     profileFields.user = req.user.id;
     if (req.body.handle) profileFields.handle = req.body.handle;
     if (req.body.name) profileFields.name = req.body.name;
-    if (req.body.userName) profileFields.userName = req.body.userName;
     if (req.body.website) profileFields.website = req.body.website;
     if (req.body.emailAddress) profileFields.emailAddress = req.body.emailAddress;
     if (req.body.bio) profileFields.bio = req.body.bio;

@@ -6,7 +6,6 @@ module.exports = function validateProfileInput(data) {
 
   data.handle = !isEmpty(data.handle) ? data.handle : '';
   data.name = !isEmpty(data.name) ? data.name : '';
-  data.userName = !isEmpty(data.userName) ? data.userName : '';
   data.emailAddress = !isEmpty(data.emailAddress) ? data.emailAddress : '';
 
   if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
@@ -19,10 +18,6 @@ module.exports = function validateProfileInput(data) {
 
   if (Validator.isEmpty(data.name)) {
     errors.name = 'Name field is required';
-  }
-
-  if (Validator.isEmpty(data.userName)) {
-    errors.userName = 'UserName field is required';
   }
 
   if (Validator.isEmpty(data.emailAddress)) {
