@@ -60,6 +60,10 @@ router.get('/handle/:handle', (req, res) => {
 
   User.findOne({ handle: req.params.handle })
     .then(user => {
+      if (!user) {
+        errors.noprofile = 'There is no profile for this user';
+        res.status(404).json(errors);
+      }
       Profile.findOne({ user: user._id })
       .populate('user', ['handle', 'avatar'])
       .then(profile => {
