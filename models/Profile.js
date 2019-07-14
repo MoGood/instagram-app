@@ -6,10 +6,9 @@ const ProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
-  handle: {
+  name: {
     type: String,
-    required: true,
-    max: 40
+    required: true
   },
   website:{
     type: String

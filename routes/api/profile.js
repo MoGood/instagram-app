@@ -20,7 +20,7 @@ router.get('/',
     const errors = {};
 
     Profile.findOne({user: req.user.id})
-      .populate('user', ['name', 'avatar'])
+      .populate('user', ['handle', 'avatar'])
       .then(profile => {
         if (!profile){
           errors.noprofile = 'There is no profile for this user';
@@ -39,7 +39,7 @@ router.get('/all', (req, res) => {
   const errors = {};
 
   Profile.find()
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['handle', 'avatar'])
     .then(profiles => {
       if (!profiles) {
         errors.noprofile = 'There are no profiles';
@@ -59,7 +59,7 @@ router.get('/handle/:handle', (req, res) => {
   const errors = {};
 
   Profile.findOne({ handle: req.params.handle })
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['handle', 'avatar'])
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
@@ -79,7 +79,7 @@ router.get('/user/:user_id', (req, res) => {
   const errors = {};
 
   Profile.findOne({ user: req.params.user_id })
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['handle', 'avatar'])
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
@@ -111,7 +111,7 @@ router.post(
     // Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (req.body.handle) profileFields.handle = req.body.handle;
+    if (req.body.name) profileFields.name = req.body.name;
     if (req.body.website) profileFields.website = req.body.website;
     if (req.body.bio) profileFields.bio = req.body.bio;
 
@@ -125,20 +125,11 @@ router.post(
           { new: true }
         ).then(profile => res.json(profile));
       } else {
-        // Create
-
-        // Check if handle exists
-        Profile.findOne({ handle: profileFields.handle })
-        .then(profile => {
-          if (profile) {
-            errors.handle = 'That handle already exists';
-            res.status(400).json(errors);
-          }
+        // Create profile
          // Save Profile
          new Profile(profileFields)
          .save()
          .then(profile => res.json(profile));
-        });
       }
     });
   }
