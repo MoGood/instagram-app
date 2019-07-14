@@ -1,4 +1,4 @@
-const Validator = require('validator');
+const validator = require('validator');
 const isEmpty = require('./is-empty');
 
 module.exports = function validateProfileInput(data) {
@@ -6,16 +6,16 @@ module.exports = function validateProfileInput(data) {
 
   data.handle = !isEmpty(data.handle) ? data.handle : '';
 
-  if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
+  if (!validator.isLength(data.handle, { min: 2, max: 40 })) {
     errors.handle = 'Handle needs to between 2 and 40 characters';
   }
 
-  if (Validator.isEmpty(data.handle)) {
+  if (validator.isEmpty(data.handle)) {
     errors.handle = 'Profile handle is required';
   }
 
   if (!isEmpty(data.website)) {
-    if (!Validator.isURL(data.website)) {
+    if (!validator.isURL(data.website)) {
       errors.website = 'Not a valid URL';
     }
   }
