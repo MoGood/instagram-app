@@ -58,15 +58,18 @@ router.get('/all', (req, res) => {
 router.get('/handle/:handle', (req, res) => {
   const errors = {};
 
-  Profile.findOne({ handle: req.params.handle })
-    .populate('user', ['handle', 'avatar'])
-    .then(profile => {
-      if (!profile) {
-        errors.noprofile = 'There is no profile for this user';
-        res.status(404).json(errors);
-      }
-
-      res.json(profile);
+  User.findOne({ handle: req.params.handle })
+    .then(user => {
+      Profile.findOne({ user: user._id })
+      .populate('user', ['handle', 'avatar'])
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = 'There is no profile for this user';
+          res.status(404).json(errors);
+        }
+        
+        res.json(profile);
+      })
     })
     .catch(err => res.status(404).json(err));
 });
