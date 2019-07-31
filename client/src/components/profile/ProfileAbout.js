@@ -7,14 +7,7 @@ class ProfileAbout extends Component {
     const { profile } = this.props;
 
     // Get first name
-    const firstName = profile.user.name.trim().split(' ')[0];
-
-    // Skill List
-    const skills = profile.skills.map((skill, index) => (
-      <div key={index} className="p-3">
-        <i className="fa fa-check" /> {skill}
-      </div>
-    ));
+    const firstName = profile.name.trim().split(' ')[0];
 
     return (
       <div className="row">
@@ -29,12 +22,6 @@ class ProfileAbout extends Component {
               )}
             </p>
             <hr />
-            <h3 className="text-center text-info">Skill Set</h3>
-            <div className="row">
-              <div className="d-flex flex-wrap justify-content-center align-items-center">
-                {skills}
-              </div>
-            </div>
           </div>
         </div>
       </div>
