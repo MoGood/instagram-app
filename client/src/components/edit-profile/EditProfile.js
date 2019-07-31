@@ -11,20 +11,10 @@ class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displaySocialInputs: false,
       handle: '',
-      company: '',
+      name: '',
       website: '',
-      location: '',
-      status: '',
-      skills: '',
-      githubusername: '',
       bio: '',
-      twitter: '',
-      facebook: '',
-      linkedin: '',
-      youtube: '',
-      instagram: '',
       errors: {}
     };
 
@@ -44,49 +34,17 @@ class CreateProfile extends Component {
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
 
-      // Bring skills array back to CSV
-      const skillsCSV = profile.skills.join(',');
-
       // If profile field doesnt exist, make empty string
-      profile.company = !isEmpty(profile.company) ? profile.company : '';
+      profile.name = !isEmpty(profile.name) ? profile.name : '';
       profile.website = !isEmpty(profile.website) ? profile.website : '';
-      profile.location = !isEmpty(profile.location) ? profile.location : '';
-      profile.githubusername = !isEmpty(profile.githubusername)
-        ? profile.githubusername
-        : '';
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
-      profile.social = !isEmpty(profile.social) ? profile.social : {};
-      profile.twitter = !isEmpty(profile.social.twitter)
-        ? profile.social.twitter
-        : '';
-      profile.facebook = !isEmpty(profile.social.facebook)
-        ? profile.social.facebook
-        : '';
-      profile.linkedin = !isEmpty(profile.social.linkedin)
-        ? profile.social.linkedin
-        : '';
-      profile.youtube = !isEmpty(profile.social.youtube)
-        ? profile.social.youtube
-        : '';
-      profile.instagram = !isEmpty(profile.social.instagram)
-        ? profile.social.instagram
-        : '';
 
       // Set component fields state
       this.setState({
         handle: profile.handle,
-        company: profile.company,
+        name: profile.name,
         website: profile.website,
-        location: profile.location,
-        status: profile.status,
-        skills: skillsCSV,
-        githubusername: profile.githubusername,
-        bio: profile.bio,
-        twitter: profile.twitter,
-        facebook: profile.facebook,
-        linkedin: profile.linkedin,
-        youtube: profile.youtube,
-        instagram: profile.instagram
+        bio: profile.bio
       });
     }
   }
@@ -96,18 +54,9 @@ class CreateProfile extends Component {
 
     const profileData = {
       handle: this.state.handle,
-      company: this.state.company,
+      name: this.state.name,
       website: this.state.website,
-      location: this.state.location,
-      status: this.state.status,
-      skills: this.state.skills,
-      githubusername: this.state.githubusername,
-      bio: this.state.bio,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      linkedin: this.state.linkedin,
-      youtube: this.state.youtube,
-      instagram: this.state.instagram
+      bio: this.state.bio
     };
 
     this.props.createProfile(profileData, this.props.history);
