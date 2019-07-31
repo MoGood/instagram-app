@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/layout/Navbar';
-//import Footer from './components/layout/Footer';
+import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import './App.css';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
@@ -9,7 +9,6 @@ import store from './store';
 import setAuthToken from './utils/setAuthtoken';
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser, logoutUser } from './actions/authActions';
-import Footer from './components/layout/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
@@ -45,7 +44,7 @@ function App() {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
             </div> 
-           
+            <Footer />
         </div>
       </Router>
     </Provider>
