@@ -45,7 +45,7 @@ class PostItem extends Component {
             <p className="text-center">{post.handle}</p>
           </div>
           <div className="col-md-10">
-            <img src={post.image} />
+            <img src={post.image} alt="" />
             <p className="lead">{post.text}</p>
             {showActions ? (
               <span>
