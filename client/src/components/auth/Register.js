@@ -1,32 +1,33 @@
 import React, { Component } from 'react'
-import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import {classnames} from 'classnames';
 import {registerUser} from '../../actions/authActions';
 import {connect} from 'react-redux';
 import { stat } from 'fs';
-import PropTypes from 'prop-types';
+
 
 class Register extends Component {
-    constructor(){
-        super();
-        this.state = {
-            name:'',
-            email:'',
-            password:'',
-            password2:'',
-            errors:{}
-        };
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
+  constructor(){
+      super();
+      this.state = {
+          handle:'',
+          email:'',
+          password:'',
+          password2:'',
+          errors:{}
+      };
+      this.onChange = this.onChange.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+  }
 
     onChange(e)
     {
-        this.setState({[e.target.name]:e.target.value});
+        this.setState({[e.target.handle]:e.target.value});
     }
     onSubmit(e){
         e.preventDefault();
         const newUser ={
-            name: this.state.name,
+            handle: this.state.handle,
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2
@@ -52,16 +53,16 @@ class Register extends Component {
         <div className="row">
           <div className="col-md-8 m-auto">
             <h1 className="display-4 text-center">Sign Up</h1>
-            <p className="lead text-center">Create your instagram account</p>
+            <p className="lead text-center">Create your Instagram account</p>
             <form onSubmit={this.onSubmit} noValidate>
               <div className="form-group">
-                <input type="text" className={classnames('form-control form-control-lg',{'is-invalid':errors.name})}placeholder="Name" name="name" 
-                value={this.state.name}
+                <input type="text" className={classnames('form-control form-control-lg',{'is-invalid':errors.handle})}placeholder="Username" name="handle" 
+                value={this.state.handle}
                 onChange={this.onChange}
                 required />
-                {errors.name && (
+                {errors.handle && (
                     <div className="invalid-feedback">
-                    {errors.name}
+                    {errors.handle}
                     </div>
                 )}
               </div>
