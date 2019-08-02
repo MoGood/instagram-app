@@ -60,10 +60,10 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-1">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            Instagram
+            <span className="logo"></span>
           </Link>
           <button
             className="navbar-toggler"
