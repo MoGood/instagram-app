@@ -11,6 +11,7 @@ const Profile = require('../../models/Profile');
 // Validation
 const validatePostInput = require('../../validation/post');
 const validateCommentInput = require('../../validation/comment');
+
 // @route   GET api/posts
 // @desc    Get posts
 // @access  Public
@@ -29,6 +30,17 @@ router.get('/:id', (req, res) => {
     .then(post => res.json(post))
     .catch(err =>
       res.status(404).json({ nopostfound: 'No post found with that ID' })
+    );
+});
+
+// @route   GET api/posts/handle/:handle
+// @desc    Get posts by user handle
+// @access  Public
+router.get('/handle/:handle', (req, res) => {
+  Post.find({ handle: req.params.handle })
+    .then(posts => res.json(posts))
+    .catch(err =>
+      res.status(404).json({ nopostsfound: 'No post(s) found with that handle' })
     );
 });
 
