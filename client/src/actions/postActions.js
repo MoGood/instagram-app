@@ -6,6 +6,7 @@ import {
   CLEAR_ERRORS,
   GET_POSTS,
   GET_POST,
+  GET_POSTS_USER,
   POST_LOADING,
   DELETE_POST
 } from './types';
@@ -55,13 +56,13 @@ export const getPostsByUser = handle => dispatch => {
     .get(`/api/posts/handle/${handle}`)
     .then(res =>
       dispatch({
-        type: GET_POSTS,
+        type: GET_POSTS_USER,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_POSTS,
+        type: GET_POSTS_USER,
         payload: null
       })
     );
