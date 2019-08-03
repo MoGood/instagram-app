@@ -8,30 +8,34 @@ class ProfileHeader extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="card card-body bg-info text-white mb-3">
+          <div className="card card-body mb-3">
             <div className="row">
-              <div className="col-4 col-md-3 m-auto">
+              <div className="col-4 col-md-3 mt-3">
                 <img
                   className="rounded-circle"
                   src={profile.user.avatar}
                   alt=""
                 />
               </div>
-            </div>
-            <div className="text-center">
-              <h1 className="display-4 text-center">{profile.user.handle}</h1>
-              <p>
+              <div className="col-6">
+                <h1 className="display-4">{profile.user.handle}</h1>
+                <h4>{profile.name}</h4>
                 {isEmpty(profile.website) ? null : (
                   <a
-                    className="text-white p-2"
-                    href={profile.website}
-                    target="_blank" rel="noopener noreferrer"
-                  >
-                    <i className="fas fa-globe fa-2x" />
+                  href={profile.website}
+                  target="_blank" rel="noopener noreferrer"
+                >
+                  <h6>{profile.website}</h6>
                   </a>
                 )}
-
-              </p>
+                {isEmpty(profile.bio) ? (
+                  <span></span>
+                ) : (
+                  <p className="lead">
+                    <span>{profile.bio}</span>
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
