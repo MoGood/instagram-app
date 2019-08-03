@@ -29,13 +29,12 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <p className="lead text-muted">
-              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+              Welcome <Link to={`/profile/${profile.user.handle}`}>{profile.user.handle}</Link>
             </p>
             <ProfileActions />
-            <div style={{ marginBottom: '60px' }} />
             <button
               onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
+              className="d-block mt-5 btn btn-danger"
             >
               Delete My Account
             </button>
@@ -60,8 +59,10 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
-              {dashboardContent}
+              <div className="col-md-8 m-auto">
+                <h1 className="display-4">Dashboard</h1>
+                {dashboardContent}
+              </div>
             </div>
           </div>
         </div>
