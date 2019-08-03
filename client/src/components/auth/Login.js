@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {loginUser} from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor() {
@@ -76,8 +77,13 @@ class Login extends Component {
                   onChange={this.onChange}
                   error={errors.password}
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input value="Log in" type="submit" className="btn btn-info btn-block mt-4" />
               </form>
+            </div>
+          </div>
+          <div className="row">
+            <div className="sign-in text-center">
+              <h6>Don't have an account? <Link to="/register">Sign up</Link></h6>
             </div>
           </div>
         </div>
