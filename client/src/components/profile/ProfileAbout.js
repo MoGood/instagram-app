@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
-import PostFeed from '../posts/PostFeed';
+import PostFeedUser from '../posts/PostFeedUser';
 import { getPostsByUser } from '../../actions/postActions';
 import { connect } from 'react-redux';
 import Spinner from '../common/Spinner';
 
 class ProfileAbout extends Component {
+
   componentDidMount() {
     this.props.getPostsByUser(this.props.profile.user.handle);
   }
@@ -19,7 +20,7 @@ class ProfileAbout extends Component {
     if (posts === null || loading) {
       postContent = <Spinner />;
     } else {
-      postContent = <PostFeed posts={posts} />;
+      postContent = <PostFeedUser posts={posts} />;
     }
 
     return (
@@ -41,7 +42,8 @@ class ProfileAbout extends Component {
 
 ProfileAbout.propTypes = {
   profile: PropTypes.object.isRequired,
-  getPostsByUser: PropTypes.func.isRequired
+  getPostsByUser: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
