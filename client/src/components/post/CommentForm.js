@@ -30,7 +30,7 @@ class CommentForm extends Component {
 
     const newComment = {
       text: this.state.text,
-      name: user.name,
+      handle: user.handle,
       avatar: user.avatar
     };
 
@@ -74,7 +74,7 @@ class CommentForm extends Component {
 }
 
 CommentForm.propTypes = {
-  addPost: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired

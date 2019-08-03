@@ -1,47 +1,53 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
+import PostFeedUser from '../posts/PostFeedUser';
+import { getPostsByUser } from '../../actions/postActions';
+import { connect } from 'react-redux';
+import Spinner from '../common/Spinner';
 
 class ProfileAbout extends Component {
+
+  componentDidMount() {
+    this.props.getPostsByUser(this.props.profile.user.handle);
+  }
+
   render() {
-    const { profile } = this.props;
 
-    // Get first name
-    const firstName = profile.user.name.trim().split(' ')[0];
+    const { posts, loading } = this.props.post;
+    let postContent;
 
-    // Skill List
-    const skills = profile.skills.map((skill, index) => (
-      <div key={index} className="p-3">
-        <i className="fa fa-check" /> {skill}
-      </div>
-    ));
+    if (posts === null || loading) {
+      postContent = <Spinner />;
+    } else {
+      postContent = <PostFeedUser posts={posts} />;
+    }
 
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="card card-body bg-light mb-3">
-            <h3 className="text-center text-info">{firstName}'s Bio</h3>
-            <p className="lead">
-              {isEmpty(profile.bio) ? (
-                <span>{firstName} does not have a bio</span>
-              ) : (
-                <span>{profile.bio}</span>
-              )}
-            </p>
+          <div className="mb-3">
             <hr />
-            <h3 className="text-center text-info">Skill Set</h3>
-            <div className="row">
-              <div className="d-flex flex-wrap justify-content-center align-items-center">
-                {skills}
-              </div>
-            </div>
+              {isEmpty({postContent}) ? (
+                  ''
+                ) : (
+                  <span>{postContent}</span>
+              )}
           </div>
         </div>
       </div>
     );
   }
 }
+
 ProfileAbout.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  getPostsByUser: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired
 };
-export default ProfileAbout;
+
+const mapStateToProps = state => ({
+  post: state.post
+});
+
+export default connect(mapStateToProps, { getPostsByUser })(ProfileAbout);

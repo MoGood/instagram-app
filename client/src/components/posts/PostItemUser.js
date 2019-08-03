@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import { deletePost, addLike, removeLike } from '../../actions/postActions';
+import { deletePostUser, addLikeUser, removeLikeUser } from '../../actions/postActions';
 
-class PostItem extends Component {
+class PostItemUser extends Component {
+
   onDeleteClick(id) {
-    this.props.deletePost(id);
+    this.props.deletePostUser(id);
   }
 
-  onLikeClick(id) {
-    this.props.addLike(id);
+  onLikeClick(id, handle) {
+    this.props.addLikeUser(id, handle);
   }
 
-  onUnlikeClick(id) {
-    this.props.removeLike(id);
+  onUnlikeClick(id, handle) {
+    this.props.removeLikeUser(id, handle);
   }
 
   findUserLike(likes) {
@@ -28,7 +29,7 @@ class PostItem extends Component {
   }
 
   render() {
-    const { post, auth, showActions } = this.props;
+    const { post, auth } = this.props;
 
     return (
       <div className="card card-body mb-3 post-item">
@@ -47,10 +48,10 @@ class PostItem extends Component {
           <div className="col-md-10">
             <img src={post.image} alt="" />
             <p className="lead">{post.text}</p>
-            {showActions ? (
+            { auth.isAuthenticated ? (
               <span>
                 <button
-                  onClick={this.onLikeClick.bind(this, post._id)}
+                  onClick={this.onLikeClick.bind(this, post._id, post.handle)}
                   type="button"
                   className="btn btn-light mr-1"
                 >
@@ -62,7 +63,7 @@ class PostItem extends Component {
                   <span className="badge badge-light">{post.likes.length}</span>
                 </button>
                 <button
-                  onClick={this.onUnlikeClick.bind(this, post._id)}
+                  onClick={this.onUnlikeClick.bind(this, post._id, post.handle)}
                   type="button"
                   className="btn btn-light mr-1"
                 >
@@ -89,14 +90,10 @@ class PostItem extends Component {
   }
 }
 
-PostItem.defaultProps = {
-  showActions: true
-};
-
-PostItem.propTypes = {
-  deletePost: PropTypes.func.isRequired,
-  addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
+PostItemUser.propTypes = {
+  deletePostUser: PropTypes.func.isRequired,
+  addLikeUser: PropTypes.func.isRequired,
+  removeLikeUser: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -105,6 +102,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { deletePost, addLike, removeLike })(
-  PostItem
+export default connect(mapStateToProps, { deletePostUser, addLikeUser, removeLikeUser })(
+  PostItemUser
 );

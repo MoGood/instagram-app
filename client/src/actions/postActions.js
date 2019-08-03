@@ -6,6 +6,7 @@ import {
   CLEAR_ERRORS,
   GET_POSTS,
   GET_POST,
+  GET_POSTS_USER,
   POST_LOADING,
   DELETE_POST
 } from './types';
@@ -48,7 +49,26 @@ export const getPosts = () => dispatch => {
     );
 };
 
-// Get Post
+// Get Posts by User
+export const getPostsByUser = handle => dispatch => {
+  dispatch(setPostLoading());
+  axios
+    .get(`/api/posts/handle/${handle}`)
+    .then(res =>
+      dispatch({
+        type: GET_POSTS_USER,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_POSTS_USER,
+        payload: null
+      })
+    );
+};
+
+// Get Post by ID
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
@@ -103,6 +123,50 @@ export const removeLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)
     .then(res => dispatch(getPosts()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete Post User Page
+export const deletePostUser = (id) => dispatch => {
+  axios
+    .delete(`/api/posts/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_POST,
+        payload: id
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Add Like User Page
+export const addLikeUser = (id, handData) => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then(res => dispatch(getPostsByUser(handData)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Remove Like User Page
+export const removeLikeUser = (id, handData) => dispatch => {
+  axios
+    .post(`/api/posts/unlike/${id}`)
+    .then(res => dispatch(getPostsByUser(handData)))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
