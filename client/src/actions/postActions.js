@@ -48,7 +48,26 @@ export const getPosts = () => dispatch => {
     );
 };
 
-// Get Post
+// Get Posts by User
+export const getPostsByUser = handle => dispatch => {
+  dispatch(setPostLoading());
+  axios
+    .get(`/api/posts/handle/${handle}`)
+    .then(res =>
+      dispatch({
+        type: GET_POSTS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_POSTS,
+        payload: null
+      })
+    );
+};
+
+// Get Post by ID
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios

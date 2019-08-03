@@ -1,34 +1,51 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
+import PostFeed from '../posts/PostFeed';
+import { getPostsByUser } from '../../actions/postActions';
+import { connect } from 'react-redux';
+import Spinner from '../common/Spinner';
 
 class ProfileAbout extends Component {
-  render() {
-    const { profile } = this.props;
+  componentDidMount() {
+    this.props.getPostsByUser(this.props.profile.user.handle);
+  }
 
-    // Get first name
-    const firstName = profile.name.trim().split(' ')[0];
+  render() {
+
+    const { posts, loading } = this.props.post;
+    let postContent;
+
+    if (posts === null || loading) {
+      postContent = <Spinner />;
+    } else {
+      postContent = <PostFeed posts={posts} />;
+    }
 
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="card card-body bg-light mb-3">
-            <h3 className="text-center text-info">{firstName}'s Bio</h3>
-            <p className="lead">
-              {isEmpty(profile.bio) ? (
-                <span>{firstName} does not have a bio</span>
-              ) : (
-                <span>{profile.bio}</span>
-              )}
-            </p>
+          <div className="mb-3">
             <hr />
+              {isEmpty({postContent}) ? (
+                  ''
+                ) : (
+                  <span>{postContent}</span>
+              )}
           </div>
         </div>
       </div>
     );
   }
 }
+
 ProfileAbout.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  getPostsByUser: PropTypes.func.isRequired
 };
-export default ProfileAbout;
+
+const mapStateToProps = state => ({
+  post: state.post
+});
+
+export default connect(mapStateToProps, { getPostsByUser })(ProfileAbout);
